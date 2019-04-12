@@ -18,8 +18,8 @@ namespace AdTools
 
 		public IAdConnector Build()
 		{
-			return BuildMock();
-			//return BuildInstance();
+			//return BuildMock();
+			return BuildInstance();
 		}
 
 		private IAdConnector BuildInstance()
@@ -50,6 +50,13 @@ namespace AdTools
 
 		public void ChangePassword(string username, string oldPassword, string newPassword)
 		{
+			using (var ctx = new PrincipalContext(ContextType.Domain))
+			{
+				using (var user = UserPrincipal.FindByIdentity(ctx, IdentityType.SamAccountName, username))
+				{
+					user?.ChangePassword(oldPassword, newPassword);
+				}
+			}
 		}
 	}
 }
