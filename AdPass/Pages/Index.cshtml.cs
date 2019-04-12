@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdPass.Model;
 using AdPass.Model.Validation;
+using AdTools;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,6 +25,8 @@ namespace AdPass.Pages
 			if (ModelState.IsValid)
 			{
 				// Process with the change
+				AdConnectorFactory.Instance.Build().ChangePassword(Model.Username, Model.CurrentPassword, Model.NewPassword1);
+				// Force user to re-logon
 				return await Task.FromResult(RedirectToPage("./Done"));
 			}
 			else
