@@ -71,6 +71,7 @@ namespace AdTools
             catch (Exception e)
             {
                 // TODO Logging
+				throw;
             }
         }
     }
