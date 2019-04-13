@@ -14,7 +14,11 @@ For windows
 You know how to it
 
 #Other-way round
+
 >\\v-app-1\webapps\apps\adpass\prod
+
 >stop-service w3svc
+
 >robocopy .\AdPass\bin\Release\netcoreapp2.2\win-x64\publish\ \\v-app-1\webapps\apps\adpass\prod
+
 >start-service w3svc
