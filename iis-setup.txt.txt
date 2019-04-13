@@ -1,0 +1,26 @@
+Install-WindowsFeature web-server, web-windows-auth -IncludeManagementTool
+wget https://download.visualstudio.microsoft.com/download/pr/c4dcaead-1f81-49af-b824-e6a42b4dbe5a/0d292d75a11666d5e2ebeed4171d27a7/dotnet-hosting-2.2.4-win.exe -o dotnet-hosting-2.2.4-win.exe
+ .\dotnet-hosting-2.2.4-win.exe OPT_NO_X86=1
+
+
+
+New-WebAppPool -Name Default
+New-Website -Name Default -Port 8443 -PhysicalPath C:\inetpub\wwwroot\ -ApplicationPool Default
+
+$adPassAppPool = New-WebAppPool -Name AdPass
+$adPassAppPool | Set-ItemProperty -Name "managedRuntimeVersion" -Value ([string]::Empty)
+$adPassAppPool | Set-ItemProperty -Name "enable32BitAppOnWin64" -Value "false"
+$adPassAppPool | Set-ItemProperty -Name "startMode" -Value "AlwaysRunning"
+
+$path = mkdir w:\apps\adpass\prod\
+$adWebSite = New-Website -Name AdPass -Port 8081 -PhysicalPath $path -ApplicationPool $($adPassAppPool.Name)
+$adWebSite | Set-ItemProperty -Name "applicationDefaults.preloadEnabled" -Value "True"
+
+Set-WebConfigurationProperty -PSPath IIS:\ -Location AdPass -Filter "system.webServer/security/authentication/anonymousAuthentication" -Name "Enabled" -Value $false
+Set-WebConfigurationProperty -PSPath IIS:\ -Location AdPass -Filter "system.webServer/security/authentication/windowsauthentication" -Name "Enabled" -Value $true
+
+
+New-NetFirewallRule -Name IIS-AdPass-HTTP-IN-TCP -Direction Inbound -DisplayName "AdPass (TCP:8081 Traffic-In)" -Group "AdPass (HTTP)" -Enabled True -Action Allow -Protocol TCP -LocalPort 8081
+
+
+Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST/AdPass'  -filter "system.webServer/aspNetCore/environmentVariables" -name "." -value @{name='ASPNETCORE_ENVIRONMENT';value='Development'}
