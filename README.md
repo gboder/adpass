@@ -9,4 +9,4 @@ AdPass is a simple ASP.NET Core solution allowing users to change their AD Passw
 * IoC using ASP.NET Core solution
 
 # Contribution
-Please feel free to contribute or fork this repository however please note that no guarantee is given about the code. Please consult the changelog page.
+Please feel free to contribute or fork this repository however please note that no guarantee is given about the code. Please consult the !changelog.md! page.
