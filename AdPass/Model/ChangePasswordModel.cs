@@ -30,6 +30,11 @@ namespace AdPass.Model
         [Compare(nameof(NewPassword1), ErrorMessage = "Les nouveaux mots de passe doivent être identiques.")]
         public string NewPassword2 { get; set; }
 
+        /// <summary>
+        /// In case of error/exceptions stores the message to be displayed to the user.
+        /// </summary>
+        public string ErrorMessage { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             // Check the current password

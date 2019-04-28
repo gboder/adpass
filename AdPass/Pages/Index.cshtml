@@ -1,66 +1,71 @@
 ﻿@page
 @model IndexModel
 @{
-	ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-	<h1 class="display-4">Gestion de mot de passe</h1>
-	<p>
-		Cette page vous permet de changer votre mot de passe.
-	</p>
-	<form method="post">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm">
-					<label asp-for="Model.CurrentPassword" class="form-text align-content-sm-end"></label>
-				</div>
-				<div class="col-md">
-					<input asp-for="Model.CurrentPassword" class="form-control" />
-				</div>
-				<div class="col-md">
-					<span asp-validation-for="Model.CurrentPassword" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm">
-					<label asp-for="Model.NewPassword1" class="form-text align-content-sm-end"></label>
-				</div>
-				<div class="col-md">
-					<input asp-for="Model.NewPassword1" class="form-control" />
-				</div>
-				<div class="col-md">
-					<span asp-validation-for="Model.NewPassword1" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm">
-					<label asp-for="Model.NewPassword2" class="form-text align-content-sm-end"></label>
-				</div>
-				<div class="col-md">
-					<input asp-for="Model.NewPassword2" class="form-control" />
-				</div>
-				<div class="col-md">
-					<span asp-validation-for="Model.NewPassword2" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col align-content-end">
-					<input type="submit" />
-				</div>
-			</div>
-		</div>
-		<input type="hidden" asp-for="Model.Username" />
-	</form>
-	<div>
-		<p>
-			Not contain the user's account name or parts of the user's full name that exceed two consecutive characters
-			Be at least six characters in length
-			Contain characters from three of the following four categories:
-			English uppercase characters (A through Z)
-			English lowercase characters (a through z)
-			Base 10 digits (0 through 9)
-			Non-alphabetic characters (for example, !, $, #, %)
-		</p>
-	</div>
+    <h1 class="display-4">Gestion de mot de passe</h1>
+    <p>
+        Cette page vous permet de changer votre mot de passe.
+    </p>
+    <form method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <span class="text-danger">@Model.Model.ErrorMessage</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <label asp-for="Model.CurrentPassword" class="form-text align-content-sm-end"></label>
+                </div>
+                <div class="col-md">
+                    <input asp-for="Model.CurrentPassword" class="form-control" />
+                </div>
+                <div class="col-md">
+                    <span asp-validation-for="Model.CurrentPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <label asp-for="Model.NewPassword1" class="form-text align-content-sm-end"></label>
+                </div>
+                <div class="col-md">
+                    <input asp-for="Model.NewPassword1" class="form-control" />
+                </div>
+                <div class="col-md">
+                    <span asp-validation-for="Model.NewPassword1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <label asp-for="Model.NewPassword2" class="form-text align-content-sm-end"></label>
+                </div>
+                <div class="col-md">
+                    <input asp-for="Model.NewPassword2" class="form-control" />
+                </div>
+                <div class="col-md">
+                    <span asp-validation-for="Model.NewPassword2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col align-content-end">
+                    <input type="submit" />
+                </div>
+            </div>
+        </div>
+        <input type="hidden" asp-for="Model.Username" />
+    </form>
+    <div>
+        <p>
+            Not contain the user's account name or parts of the user's full name that exceed two consecutive characters
+            Be at least six characters in length
+            Contain characters from three of the following four categories:
+            English uppercase characters (A through Z)
+            English lowercase characters (a through z)
+            Base 10 digits (0 through 9)
+            Non-alphabetic characters (for example, !, $, #, %)
+        </p>
+    </div>
 </div>
