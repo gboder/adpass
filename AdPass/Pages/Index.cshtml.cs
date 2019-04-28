@@ -47,7 +47,7 @@ namespace AdPass.Pages
                 // Show error
                 Model.ErrorMessage = string.Join(',',
                     ModelState.Values.Where(v => v.ValidationState == ModelValidationState.Invalid)
-                    .SelectManyAdde(v => v.Errors.Select(e => e.ErrorMessage)));
+                    .SelectMany(v => v.Errors.Select(e => e.ErrorMessage)));
                 return await Task.FromResult(Page());
             }
         }
